@@ -6155,6 +6155,23 @@ spawn(function()
 end)
 
 
+Tabs.Race:AddButton({
+    Title = "Teleport PVP Zone",
+    Description = "",
+    Callback = function()
+        toTarget(CFrame.new(28766.681640625, 14967.1455078125, -164.13290405273438))
+    end
+})
+
+Tabs.Race:AddButton({
+    Title = "Teleport To Safe Zone PVP",
+    Description = "",
+    Callback = function()
+        toTarget(CFrame.new(28273.0859375, 14896.5078125, 157.42063903808594))
+    end
+})
+
+
 
 
 local Mastery = Tabs.Race:AddSection("Tự Động Luyện TỘc")
