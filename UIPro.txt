@@ -1,3 +1,18 @@
+spawn(function() 
+    repeat
+        task.wait()
+    until game:IsLoaded()
+    repeat
+        task.wait()
+    until game.Players
+    repeat
+        task.wait()
+    until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
+    wait(1.5)
+    require(game.ReplicatedStorage.Notification).new("<Color=Red> WELECOM TO BEST Hub<Color=/>"):Display()
+    require(game.ReplicatedStorage.Notification).new("<Color=Blue>THÔNG BÁO:Hub Ít Tính Năng Do Tối Ưu<Color=/>"):Display()
+end)
+
 local SpeedHubX = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Library.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Interface.lua"))()
@@ -6170,37 +6185,6 @@ Tabs.Race:AddButton({
         toTarget(CFrame.new(28273.0859375, 14896.5078125, 157.42063903808594))
     end
 })
-
-local ToggleAutoKilltrial = Tabs.Race:AddToggle("ToggleAutotrial", {Title = "Tụ Động hoàn thành ải",Description = "", Default = false })
-ToggleAutoKilltrial:OnChanged(function(Value)
-    _G.KillAfterTrials = value
-    StopTween(_G.KillAfterTrials)
-end)
-
-spawn(function()
-    while wait() do 
-        pcall(function()
-            if _G.KillAfterTrials then
-                for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
-                    if v.Name ~= game.Players.LocalPlayer.Name and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
-                        if v.Humanoid.Health > 0 then
-                            repeat wait()
-                                AutoHaki()
-                                EquipWeapon(_G.SelectWeapon)
-                                NameTarget = v.Name
-                                TP1(v.HumanoidRootPart.CFrame * CFrame.new(0,0,5))
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Head.CanCollide = false
-                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-                                Click()
-                            until not _G.KillAfterTrials or not v.Parent or v.Humanoid.Health <= 0 
-                        end
-                    end
-                end
-            end
-        end)
-    end
-end)
 
 
 
