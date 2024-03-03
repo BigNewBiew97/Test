@@ -27,17 +27,17 @@ local Window = SpeedHubX:CreateWindow({
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
-    Main = Window:AddTab({ Title = "chính", Icon = "home" }),
-    Stats = Window:AddTab({ Title = "chỉ số", Icon = "plus-circle" }),
-    Player = Window:AddTab({ Title = "người chơi", Icon = "baby" }),
-    Teleport = Window:AddTab({ Title = "tele đảo", Icon = "palmtree" }),
-    Fruit = Window:AddTab({ Title = "trái", Icon = "cherry" }),
-    Raid = Window:AddTab({ Title = "tập kích", Icon = "swords" }),
-    Visual = Window:AddTab({ Title = "Visual", Icon = "scan-face" }),
-    Race = Window:AddTab({ Title = "Tộc V4", Icon = "chevrons-right" }),
-    Shop = Window:AddTab({ Title = "cửa hàng", Icon = "shopping-cart" }),
-	Misc = Window:AddTab({ Title = "khác", Icon = "list-plus" }),
-    Setting = Window:AddTab({ Title = "cài đặt", Icon = "settings" }),
+    Main = Window:AddTab({ Title = "chính", Icon = "home" }),wait(1),
+    Stats = Window:AddTab({ Title = "chỉ số", Icon = "plus-circle" }),wait(1),
+    Player = Window:AddTab({ Title = "người chơi", Icon = "baby" }),wait(1),
+    Teleport = Window:AddTab({ Title = "tele đảo", Icon = "palmtree" }),wait(1),
+    Fruit = Window:AddTab({ Title = "trái", Icon = "cherry" }),wait(1),
+    Raid = Window:AddTab({ Title = "tập kích", Icon = "swords" }),wait(1),
+    Visual = Window:AddTab({ Title = "Visual", Icon = "scan-face" }),wait(1),
+    Race = Window:AddTab({ Title = "Tộc V4", Icon = "chevrons-right" }),wait(1),
+    Shop = Window:AddTab({ Title = "cửa hàng", Icon = "shopping-cart" }),wait(1),
+	Misc = Window:AddTab({ Title = "khác", Icon = "list-plus" }),wait(1),
+    Setting = Window:AddTab({ Title = "cài đặt", Icon = "settings" }),wait(1),
 }
 local Options = Fluent.Options
 do
@@ -5063,7 +5063,7 @@ Tabs.Teleport:AddButton({
 
 
 Tabs.Teleport:AddButton({
-    Title = "Sea 3a",
+    Title = "Sea 3",
     Description = "",
     Callback = function()
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
