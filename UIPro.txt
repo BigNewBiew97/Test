@@ -16,7 +16,6 @@ end)
 local SpeedHubX = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Library.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Interface.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Key-System%20%26%20Keyless"))()
 repeat wait() until game:IsLoaded()
 local Window = SpeedHubX:CreateWindow({
     Title = "BEST HUB | Verison 4.0",
@@ -2497,11 +2496,11 @@ local listfastattack = {'Normal Attack','Fast Attack','Super Fast Attack'}
     DropdownDelayAttack:OnChanged(function(Value)
     _G.FastAttackGamer144_Mode = Value
 	if _G.FastAttackGamer144_Mode == "Fast Attack" then
-		_G.Fast_Delay = 0.08
+		_G.Fast_Delay = 0.04
 	elseif _G.FastAttackGamer144_Mode == "Normal Attack" then
-		_G.Fast_Delay = 0.05
-	elseif _G.FastAttackGamer144YTB_Mode == "Super Fast Attack" then
 		_G.Fast_Delay = 0.03
+	elseif _G.FastAttackGamer144YTB_Mode == "Super Fast Attack" then
+		_G.Fast_Delay = 0.02
 	end
 end)
 
