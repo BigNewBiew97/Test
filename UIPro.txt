@@ -27,17 +27,17 @@ local Window = SpeedHubX:CreateWindow({
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
-    Main = Window:AddTab({ Title = "chính", Icon = "home" }),wait(1),
-    Stats = Window:AddTab({ Title = "chỉ số", Icon = "plus-circle" }),wait(1),
-    Player = Window:AddTab({ Title = "người chơi", Icon = "baby" }),wait(1),
-    Teleport = Window:AddTab({ Title = "tele đảo", Icon = "palmtree" }),wait(1),
-    Fruit = Window:AddTab({ Title = "trái", Icon = "cherry" }),wait(1),
-    Raid = Window:AddTab({ Title = "tập kích", Icon = "swords" }),wait(1),
-    Visual = Window:AddTab({ Title = "Visual", Icon = "scan-face" }),wait(1),
-    Race = Window:AddTab({ Title = "Tộc V4", Icon = "chevrons-right" }),wait(1),
-    Shop = Window:AddTab({ Title = "cửa hàng", Icon = "shopping-cart" }),wait(1),
-	Misc = Window:AddTab({ Title = "khác", Icon = "list-plus" }),wait(1),
-    Setting = Window:AddTab({ Title = "cài đặt", Icon = "settings" }),wait(1),
+    Main = Window:AddTab({ Title = "chính", Icon = "home" }),
+    Stats = Window:AddTab({ Title = "chỉ số", Icon = "plus-circle" }),
+    Player = Window:AddTab({ Title = "người chơi", Icon = "baby" }),
+    Teleport = Window:AddTab({ Title = "tele đảo", Icon = "palmtree" }),
+    Fruit = Window:AddTab({ Title = "trái", Icon = "cherry" }),
+    Raid = Window:AddTab({ Title = "tập kích", Icon = "swords" }),
+    Visual = Window:AddTab({ Title = "Visual", Icon = "scan-face" }),
+    Race = Window:AddTab({ Title = "Tộc V4", Icon = "chevrons-right" }),
+    Shop = Window:AddTab({ Title = "cửa hàng", Icon = "shopping-cart" }),
+	Misc = Window:AddTab({ Title = "khác", Icon = "list-plus" }),
+    Setting = Window:AddTab({ Title = "cài đặt", Icon = "settings" }),
 }
 local Options = Fluent.Options
 do
@@ -2568,7 +2568,7 @@ end)
             wait()
         end
     end)
-    Options.ToggleLevel:SetValue(false)
+    Options.ToggleAutoFarmLevel:SetValue(false)
     spawn(function()
         while task.wait() do
         if _G.AutoLevel then
@@ -2576,7 +2576,15 @@ end)
           CheckLevel()
           if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
           game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-          toTarget(CFrameQ)
+          if BypassTP then
+          if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude > 2500 then
+          BTP(CFrameQ)
+          elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude < 2500 then
+          Tween(CFrameQ)
+          end
+    else
+            Tween(CFrameQ)
+            end
           if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
           game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,QuestLv)
           end
@@ -2584,12 +2592,10 @@ end)
           for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
           if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
           if v.Name == Ms then
-          repeat wait(_G.Fast_Delay)
-          AttackNoCoolDown()
-          bringmob = true
+          repeat game:GetService("RunService").Heartbeat:wait()
           AutoHaki()
           EquipTool(SelectWeapon)
-          toTarget(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+          Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
           v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
           v.HumanoidRootPart.Transparency = 1
           v.Humanoid.JumpPower = 0
@@ -2597,20 +2603,20 @@ end)
           v.HumanoidRootPart.CanCollide = false
           FarmPos = v.HumanoidRootPart.CFrame
           MonFarm = v.Name
-          --Click
+          Click()
           until not _G.AutoLevel or not v.Parent or v.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(v.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
-          bringmob = false
-        end   
+          end   
           end
           end
           for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
           if string.find(v.Name,NameMon) then
           if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
-            toTarget(v.CFrame * CFrame.new(posX,posY,posZ))
+            Tween(v.CFrame * CFrame.new(posX,posY,posZ))
           end
           end
           end
           end
+          Tween(v.HumanoidRootPart.CFrame * Pos2)
           end)
         end
         end
