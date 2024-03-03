@@ -6176,7 +6176,6 @@ ToggleFastAttackTrial:OnChanged(function(Value)
     StopTween(_G.KillAfterTrials)
 end)
 Options.ToggleFastAttackTrial:SetValue(false)
-
 spawn(function()
     while wait() do 
         pcall(function()
