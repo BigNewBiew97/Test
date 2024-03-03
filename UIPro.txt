@@ -3127,7 +3127,7 @@ spawn(function()
                                             Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
 			                                v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
                                             v.HumanoidRootPart.Transparency = 1
-                                            v.Humanoid.JumpPower = 0
+                                            v.Humanoid.JumpPower = 2
                                             v.Humanoid.WalkSpeed = 0
                                             v.HumanoidRootPart.CanCollide = false
                                             FarmPos = v.HumanoidRootPart.CFrame
@@ -6167,6 +6167,47 @@ spawn(function()
         end
     end)
 end)
+
+
+local ToggleFastAttackTrial = Tabs.Player:AddToggle("ToggleFastAttack", {Title = "Đánh Người Chơi ở trial",Description = "", Default = false })
+
+ToggleFastAttackTrial:OnChanged(function(Value)
+ _G.KillAfterTrials = value
+    StopTween(_G.KillAfterTrials)
+end)
+Options.ToggleFastAttackTrial:SetValue(false)
+
+spawn(function()
+    while wait() do 
+        pcall(function()
+            if _G.KillAfterTrials then
+                for i,v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+                    if v.Name ~= game.Players.LocalPlayer.Name and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
+                        if v.Humanoid.Health > 0 then
+                            repeat wait()
+                                AutoHaki()
+                                EquipWeapon(_G.SelectWeapon)
+                                NameTarget = v.Name
+                                TP1(v.HumanoidRootPart.CFrame * CFrame.new(0,0,5))
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                                Click()
+                            until not _G.KillAfterTrials or not v.Parent or v.Humanoid.Health <= 0 
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+  
+  
+  RaceV4:AddButton("Buy Ancient One Quest",function(t)
+  game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer('UpgradeRace','Buy')
+  end)
+end
+
 
 
 Tabs.Race:AddButton({
