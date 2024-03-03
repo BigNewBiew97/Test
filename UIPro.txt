@@ -6200,13 +6200,6 @@ spawn(function()
         end)
     end
 end)
-  
-  
-  RaceV4:AddButton("Buy Ancient One Quest",function(t)
-  game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer('UpgradeRace','Buy')
-  end)
-end
-
 
 
 Tabs.Race:AddButton({
