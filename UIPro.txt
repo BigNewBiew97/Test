@@ -4,7 +4,7 @@ spawn(function()
     while task.wait() do
         pcall(function()
             if _G.BringMonster then
-                QuestCheck()
+                CheckLevel()
                 for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if _G.AutoFarm and StartMagnet and v.Name == Mon and (Mon == "Factory Staff [Lv. 800]" or Mon == "Monkey [Lv. 14]" or Mon == "Dragon Crew Warrior [Lv. 1575]" or Mon == "Dragon Crew Archer [Lv. 1600]") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 220 then
                         v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -57,7 +57,7 @@ local Window = SpeedHubX:CreateWindow({
     SubTitle = "By Huy and Best Trial",
     TabWidth = 80,
     Size = UDim2.fromOffset(500, 350),
-    Acrylic = false,
+    Acrylic = true,
     Theme = "Rose",
     MinimizeKey = Enum.KeyCode.End
 })
@@ -79,6 +79,66 @@ do
     
 local id = game.PlaceId
 if id == 2753915549 then First_Sea = true; elseif id == 4442272183 then Second_Sea = true; elseif id == 7449423635 then Third_Sea = true; else game:Shutdown() end;
+Function
+_G.FpsBoost1 = true
+spawn(function()
+    pcall(function()
+        while wait() do
+            if _G.FpsBoost1 then
+                game:GetService("Lighting").Sky:Destroy()
+                game:GetService("Lighting").BaseAtmosphere:Destroy()
+                game:GetService("Lighting").Bloom:Destroy()
+                game:GetService("Lighting").Blur:Destroy()
+                game:GetService("Lighting").ColorCorrection:Destroy()
+                game:GetService("Lighting").GlobalColorCorrection:Destroy()
+                game:GetService("Lighting").TrialDeath:Destroy()
+                local g = game
+                local w = g.Workspace
+                local l = g.Lighting
+                local t = w.Terrain
+                t.WaterWaveSize = 0
+                t.WaterWaveSpeed = 0
+                t.WaterReflectance = 0
+                t.WaterTransparency = 0
+                l.GlobalShadows = false
+                l.FogEnd = 9e9
+                l.Brightness = 0
+                settings().Rendering.QualityLevel = "Level01"
+                for i, v in pairs(g:GetDescendants()) do
+                if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+                v.Material = "Plastic"
+                v.Reflectance = 0
+                elseif v:IsA("Decal") or v:IsA("Texture") then
+                v.Transparency = 1
+                elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                v.Lifetime = NumberRange.new(0)
+                elseif v:IsA("Explosion") then
+                v.Transparency = 1
+                v.BlastPressure = 1
+                v.BlastRadius = 1
+                elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+                v.Enabled = false
+                elseif v:IsA("MeshPart") then
+                v.Material = "Plastic"
+                v.Reflectance = 0
+                v.TextureID = 10385902758728957
+                end
+                end
+                for i, e in pairs(l:GetChildren()) do
+                if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+                e.Enabled = false
+                end
+                end
+                for i, v in pairs(game:GetService("Workspace").Camera:GetDescendants()) do
+                if v.Name == ("Water;") then
+                v.Transparency = 1
+                v.Material = "Plastic"
+                    end
+                end
+            end
+        end
+    end)
+end)
 
 function AntiBan()
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
