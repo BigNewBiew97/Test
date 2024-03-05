@@ -54,7 +54,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/BigNewBiew97/Test/main/Key-System%20%26%20Keyless.txt"))()
 repeat wait() until game:IsLoaded()
 local Window = SpeedHubX:CreateWindow({
-    Title = "BEST HUB | ..G_Version",
+    Title = "BEST HUB | "..G_Version,
     SubTitle = "By Huy and Best Trial",
     TabWidth = 80,
     Size = UDim2.fromOffset(500, 350),
