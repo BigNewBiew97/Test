@@ -51,7 +51,7 @@ end)
 local SpeedHubX = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Library.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Interface.lua"))()
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/BigNewBiew97/Test/main/Key-System%20%26%20Keyless.txt"))()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/BigNewBiew97/Test/main/Key-System%20%26%20Keyless.txt")))()
 repeat wait() until game:IsLoaded()
 local Window = SpeedHubX:CreateWindow({
     Title = "BEST HUB | ..G_Version",
@@ -6516,17 +6516,11 @@ Tabs.Shop:AddButton({
 	end
 })
 
-if First_Sea or Second_Sea then
-    local Mastery = Tabs.Hop:AddSection("Sea 3 nha!!!")
-end
-
-if Third_Sea then
 local ToggleFindMoon = Tabs.Hop:AddToggle("ToggleFindMoon", {Title = "Tìm trăng tròn",Description = "", Default = false })
 ToggleFindMoon:OnChanged(function(Value)
     _G.AutoFindMoon = Value
 end)
 Options.ToggleFindMoon:SetValue(false)
-
 
 spawn(function()
     while wait() do
@@ -6552,7 +6546,7 @@ spawn(function()
         elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=16137232629" then
             Hop()
             Fluent:Notify({
-                Title = "Best Hub",
+                Title = "Best Hub ui",
                 Content = "Hop...",
                 SubContent = "", -- Optional
                 Duration = 5 -- Set to nil to make the notification not disappear
@@ -6563,7 +6557,6 @@ spawn(function()
         end
     end
 end)
-
 
 local ToggleMirageIsland = Tabs.Hop:AddToggle("ToggleMirageIsland", {Title = "Tìm đảo bí ẩn",Description = "", Default = false })
 ToggleMirageIsland:OnChanged(function(Value)
