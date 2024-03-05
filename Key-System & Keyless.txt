@@ -1,4 +1,3 @@
-_G.Key_System = false
 _G.Version = "Version: 4.0.0"
 
 -- Anti Lag
