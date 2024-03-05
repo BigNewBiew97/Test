@@ -4,7 +4,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Key-System%20%26%20Keyless"))()
 repeat wait() until game:IsLoaded()
 local Window = ZueszYTB:CreateWindow({
-Title = "Tên YTB | ".._G.Version,
+Title = "Tên YTB | "_G.Version,
 SubTitle = "Version 2.0",
 TabWidth = 160,
 Size = UDim2.fromOffset(560, 350),
