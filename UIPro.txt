@@ -51,9 +51,10 @@ end)
 local SpeedHubX = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Library.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Interface.lua"))()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/BigNewBiew97/Test/main/Key-System%20%26%20Keyless.txt")))()
 repeat wait() until game:IsLoaded()
 local Window = SpeedHubX:CreateWindow({
-    Title = "BEST HUB | Verison 4.0",
+    Title = "BEST HUB | ..G_Version",
     SubTitle = "By Huy and Best Trial",
     TabWidth = 80,
     Size = UDim2.fromOffset(500, 350),
@@ -71,6 +72,7 @@ local Tabs = {
     Visual = Window:AddTab({ Title = "Visual", Icon = "scan-face" }),
     Race = Window:AddTab({ Title = "Tộc V4", Icon = "chevrons-right" }),
     Shop = Window:AddTab({ Title = "cửa hàng", Icon = "shopping-cart" }),
+    Hop = Window:AddTab({ Title = "Đổi sever", Icon = "wifi" }),
 	Misc = Window:AddTab({ Title = "khác", Icon = "list-plus" }),
     Setting = Window:AddTab({ Title = "cài đặt", Icon = "settings" }),
 }
@@ -6513,6 +6515,76 @@ Tabs.Shop:AddButton({
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","2")
 	end
 })
+
+if First_Sea or Second_Sea then
+    local Mastery = Tabs.Hop:AddSection("Sea 3 nha!!!")
+end
+
+if Third_Sea then
+local ToggleFindMoon = Tabs.Hop:AddToggle("ToggleFindMoon", {Title = "Tìm trăng tròn",Description = "", Default = false })
+ToggleFindMoon:OnChanged(function(Value)
+    _G.AutoFindMoon = Value
+end)
+Options.ToggleFindMoon:SetValue(false)
+
+
+spawn(function()
+    while wait() do
+        if _G.AutoFindMoon then
+        if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=16137232629" or game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=16137232629" then
+            wait(2.0)
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=16137232629" then
+            Hop()
+            Fluent:Notify({
+                Title = "Best Hub,
+                Content = "Turn Off Find Full Moon...",
+                SubContent = "", -- Optional
+                Duration = 5 -- Set to nil to make the notification not disappear
+            })
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=16137232629" then
+            Hop()
+            Fluent:Notify({
+                Title = "Best Hub",
+                Content = "Hop...",
+                SubContent = "", -- Optional
+                Duration = 5 -- Set to nil to make the notification not disappear
+            })
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=16137232629" then
+            Hop()
+            Fluent:Notify({
+                Title = "Best Hub",
+                Content = "Hop...",
+                SubContent = "", -- Optional
+                Duration = 5 -- Set to nil to make the notification not disappear
+            })
+        else
+            Hop()
+            end
+        end
+    end
+end)
+
+
+local ToggleMirageIsland = Tabs.Hop:AddToggle("ToggleMirageIsland", {Title = "Tìm đảo bí ẩn",Description = "", Default = false })
+ToggleMirageIsland:OnChanged(function(Value)
+    _G.FindMirageIsland = Value
+end)
+Options.ToggleMirageIsland:SetValue(false)
+
+spawn(function()
+    while wait() do
+    if _G.FindMirageIsland then
+        if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") or game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+            if HighestPointRealCFrame and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - HighestPointRealCFrame.Position).Magnitude > 10 then
+            Tween(getHighestPoint().CFrame * CFrame.new(0, 211.88, 0))
+                end
+        elseif not game:GetService("Workspace").Map:FindFirstChild("MysticIsland") or not game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+            Hop()
+            end
+        end
+    end
+end)
+end
 
 Tabs.Misc:AddButton({
 	Title = "tham gia lại máy chủ",
