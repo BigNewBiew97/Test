@@ -6462,7 +6462,6 @@ ToggleFindMoon:OnChanged(function(Value)
 end)
 Options.ToggleFindMoon:SetValue(false)
 
-
 spawn(function()
     while wait() do
         if _G.AutoFindMoon then
@@ -6498,7 +6497,6 @@ spawn(function()
         end
     end
 end)
-
 
 local ToggleMirageIsland = Tabs.Hop:AddToggle("ToggleMirageIsland", {Title = "Tìm đảo bí ẩn",Description = "", Default = false })
 ToggleMirageIsland:OnChanged(function(Value)
