@@ -594,7 +594,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 			DropImage.Position = UDim2.new(0, 445, 0, 6)
 			DropImage.Rotation = 180.000
 			DropImage.Size = UDim2.new(0, 20, 0, 20)
-			DropImage.Image = "rbxassetid://16645461271"
+			DropImage.Image = "rbxassetid://16645461254"
 			
 			DropButton.Name = "DropButton"
 			DropButton.Parent = Dropdown
