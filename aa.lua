@@ -990,7 +990,7 @@ local UiIntilize = {
                 SettingManager:Save()
             end
         },
-       -
+       -- {
         --    Mode = "Toggle",
         --    Title = "Spin Ship If Idle",
         --    Description = "Safe Mode Ship",
@@ -1235,7 +1235,6 @@ local UiIntilize = {
             end
         },
         
-       
             Mode = "Toggle",
             Title = "Auto Trade X2 Exp (Candy)",
             Args = {"Shop", "Candy X2 EXP"},
@@ -2615,7 +2614,7 @@ local UiIntilize = {
                 SettingManager:Save()
             end
         },
-       
+
             Mode = "Toggle",
             Title = "Auto Spawn Ship",
             Description = "For Farming Sharks, Piranha, Terror Shark",
@@ -2862,7 +2861,7 @@ local UiIntilize = {
             Mode = "Label",
             Title = "Sea Events Setting"
         },
-        -
+
         {
             Mode = "Toggle",
             Title = "Spin Ship If In Farming",
@@ -2883,7 +2882,7 @@ local UiIntilize = {
                 SettingManager:Save()
             end
         },
-       -
+       -- {
         --    Mode = "Toggle",
         --    Title = "Spin Ship If Idle",
         --    Description = "Safe Mode Ship",
@@ -3127,8 +3126,7 @@ local UiIntilize = {
                 SettingManager:Save()
             end
         },
-        
-       
+     
             Mode = "Toggle",
             Title = "Auto Trade X2 Exp (Candy)",
             Args = {"Shop", "Candy X2 EXP"},
