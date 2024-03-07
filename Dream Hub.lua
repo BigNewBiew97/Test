@@ -25,12 +25,13 @@ local ScreenGui = Instance.new("ScreenGui")
     
     Toggle.Name = "Toggle"
     Toggle.Parent = ScreenGui
-    Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    Toggle.BorderSizePixel = 0
+    Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Toggle.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
     Toggle.Size = UDim2.new(0, 50, 0, 50)
-    Toggle.Draggable = True
-    Toggle.Image = "rbxassetid://16471178798"
+    Toggle.Font = Enum.Font.Code
+    Toggle.Text = "Cheems Dz"
+    Toggle.TextColor3 = Color3.fromRGB(0, 0, 0)
+    Toggle.TextScaled = true
     Toggle.MouseButton1Down:connect(function()
         game:GetService("VirtualInputManager"):SendKeyEvent(true,305,false,game)
         game:GetService("VirtualInputManager"):SendKeyEvent(false,305,false,game)
@@ -2925,7 +2926,7 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
     wait(1)
     game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
-local Library = DarkraiX:Window("Cheems Hub","Blox Fruit | Paid Script","DarkRaiGui",Enum.KeyCode.RightControl);
+local Library = DarkraiX:Window("Cheems Hub","DarkRaiGui",Enum.KeyCode.RightControl);
 local Main = Library:AddTab("Genaral","")
 local Set = Library:AddTab("Settings","")
 local Auto = Library:AddTab("Automatic","")
