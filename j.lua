@@ -1,7 +1,7 @@
 local SpeedHubX = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Library.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/ahmadsgamer2/Speed-Hub-X/main/Interface.lua"))()
-loadstring(game:HttpGet("https://cdn.simprose.me/file/b.txt"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/BigNewBiew97/Test/main/Key-System%20%26%20Keyless.txt"))()
 repeat wait() until game:IsLoaded()
 local Window = SpeedHubX:CreateWindow({
     Title = "Pknz Hub| ".._G.Version,
@@ -1669,15 +1669,7 @@ end)
             UpdateClient()
         end
     end)
-    
-    Tabs.Main:AddButton({
-        Title = "Join Zalo - SIMP ROSE",
-        Description = "Invite Zalo SIMP ROSE",
-        Callback = function()
-            setclipboard(_G.Discord)
-        end
-    })
-    
+            
         Tabs.Main:AddParagraph({
             Title = "Config",
             Content = ""
