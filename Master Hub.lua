@@ -4269,7 +4269,7 @@ end)
 
  
 --------------------------------------------------------------------
-local Library = Update:Window("Hiếu Đẹp Trai","")
+local Library = Update:Window("Hiếu","")
 ------------------------------------------
 
 spawn(function()
