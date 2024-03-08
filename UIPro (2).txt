@@ -5883,9 +5883,9 @@ elseif Third_Sea then
 end
 
 Tabs.Visual:AddButton({
-    Title = "Rain Fruit",
-    Description = "",
-    Callback = function()
+	Title = "Rain Fruit",
+	Description = "Rain fruit (Fake)",
+	Callback = function()
         for i, v in pairs(game:GetObjects("rbxassetid://14759368201")[1]:GetChildren()) do
             v.Parent = game.Workspace.Map
             v:MoveTo(game.Players.LocalPlayer.Character.PrimaryPart.Position + Vector3.new(math.random(-50, 50), 100, math.random(-50, 50)))
@@ -5899,7 +5899,7 @@ Tabs.Visual:AddButton({
                 end
             end)
         end
-    end
+	end
 })
 
 Tabs.Visual:AddButton({
