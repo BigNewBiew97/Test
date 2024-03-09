@@ -81,7 +81,6 @@ game:GetService("VirtualInputManager"):SendKeyEvent(false,127,false,game)
 end)
 
 local Options = SpeedHubX.Options
-
 do
 
 game:GetService("Players").LocalPlayer.Idled:connect(
