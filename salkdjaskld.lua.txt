@@ -10,11 +10,13 @@ local Tab = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
 local Tab11 = Window:MakeTab({
 	Name = "Local Player",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
 local Tab3 = Window:MakeTab({
 	Name = "DF and Raid",
 	Icon = "rbxassetid://4483345998",
@@ -26,36 +28,43 @@ local Tab8 = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
 local Tab9 = Window:MakeTab({
 	Name = "Upgrade Race",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
 local Tab2 = Window:MakeTab({
 	Name = "Misc",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
 local Tab4 = Window:MakeTab({
 	Name = "Webhook",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
 local Tab5 = Window:MakeTab({
 	Name = "Get Items",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
 local Tab6 = Window:MakeTab({
 	Name = "PVP",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
 local Tab10 = Window:MakeTab({
 	Name = "Settings",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
 local plr = game.Players.LocalPlayer
 local CommF = game.ReplicatedStorage.Remotes["CommF_"]
 local Settings = {}
