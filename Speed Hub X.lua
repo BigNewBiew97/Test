@@ -1686,14 +1686,6 @@ end)
         end
     end)
     
-    Tabs.Main:AddButton({
-        Title = "Join Discord - Speed Hub X",
-        Description = "Invite Discord Speed Hub X!",
-        Callback = function()
-            setclipboard(_G.Discord)
-        end
-    })
-    
         Tabs.Main:AddParagraph({
             Title = "Config",
             Content = ""
