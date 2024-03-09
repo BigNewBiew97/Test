@@ -6435,6 +6435,9 @@ Tabs.RaceV4:AddButton({
     end
 })
 
+
+
+
 FruitList = {
     "Bomb-Bomb",
     "Spike-Spike",
