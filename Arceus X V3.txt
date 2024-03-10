@@ -214,7 +214,7 @@ AZY["1c"]["CornerRadius"] = UDim.new(0, 14);
 -- StarterGui.ArceusXV3.MainUI.MainFrame.Panel.Logo
 AZY["1d"] = Instance.new("ImageLabel", AZY["1b"]);
 AZY["1d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-AZY["1d"]["Image"] = [[rbxassetid://12564267060]];
+AZY["1d"]["Image"] = [[rbxassetid://16471178798]];
 AZY["1d"]["Size"] = UDim2.new(0.05029655620455742, 0, 0.9125484824180603, 0);
 AZY["1d"]["Name"] = [[Logo]];
 AZY["1d"]["BackgroundTransparency"] = 1;
@@ -254,7 +254,7 @@ AZY["21"] = Instance.new("LocalScript", AZY["20"]);
 -- StarterGui.ArceusXV3.MainUI.MainFrame.Panel.Expand
 AZY["22"] = Instance.new("ImageButton", AZY["1b"]);
 AZY["22"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-AZY["22"]["Image"] = [[rbxassetid://12566545357]];
+AZY["22"]["Image"] = [[rbxassetid://16471178798]];
 AZY["22"]["Size"] = UDim2.new(0.06901533156633377, 0, 1, 0);
 AZY["22"]["Name"] = [[Expand]];
 AZY["22"]["Position"] = UDim2.new(0.8481356501579285, 0, -0.024522678926587105, 0);
