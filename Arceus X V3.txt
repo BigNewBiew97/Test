@@ -1,16 +1,3 @@
---[=[
-
-    ___      _  _     __     _         _         ____   
-  ,"___".   FJ  L]    FJ    FJ        FJ        [__  '. 
-  FJ---L]  J |__| L  J  L  J |       J |        `--7 .' 
- J |   LJ  |  __  |  |  |  | |       | |         .'.'.' 
- | \___--. F L__J J  F  J  F L_____  F L_____  .' (_(__ 
- J\_____/FJ__L  J__LJ____LJ________LJ________LJ________L
-  J_____F |__L  J__||____||________||________||________|
-                                                        
- 
-]=]
-
 --Huge thanks for Bread for good textbox and remake the sliders :D
 --GuiToLua By Creator of Backdoor.exe
 
