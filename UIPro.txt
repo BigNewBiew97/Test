@@ -52,7 +52,6 @@ local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/BigNewBiew97/Test/main/Key-System%20%26%20Keyless.txt"))()
-repeat wait() until game:IsLoaded()
 local Window = Fluent:CreateWindow({
     Title = "BEST HUB | ".._G.Version,
     SubTitle = "By Huy and Best Trial",
@@ -100,9 +99,9 @@ function AntiBan()
     AntiBan()
 
 game:GetService("Players").LocalPlayer.Idled:connect(function()
-	game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 	wait(1)
-	game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
 First_Sea = false
@@ -2506,7 +2505,7 @@ ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
 ImageButton.Size = UDim2.new(0, 50, 0, 50)
 ImageButton.Draggable = true
-ImageButton.Image = "rbxassetid://16711282498"
+ImageButton.Image = "rbxassetid://16223659141"
 ImageButton.MouseButton1Down:connect(function()
     game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
 end)
@@ -2590,6 +2589,15 @@ end)
             end)
         end
     end)
+
+
+    Tabs.Main:AddButton({
+        Title = "Dừng bay",
+        Description = "",
+        Callback = function()
+           toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        end
+    })
 
 
     local ToggleLevel = Tabs.Main:AddToggle("ToggleLevel", {
@@ -5290,14 +5298,6 @@ Tabs.Teleport:AddButton({
         end
     })
 
-    Tabs.Teleport:AddButton({
-        Title = "Dừng bay",
-        Description = "",
-        Callback = function()
-           toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-        end
-    })
-
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 --Fruit
@@ -6234,8 +6234,6 @@ spawn(function()
                     if v.Name ~= game.Players.LocalPlayer.Name and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 100 then
                         if v.Humanoid.Health > 0 then
                             repeat wait()
-                                (_G.Fast_Delay)
-                                AttackNoCoolDown()
                                 AutoHaki()
                                 EquipWeapon(SelectWeapon)
                                 NameTarget = v.Name
@@ -7041,7 +7039,7 @@ end)
 Options.ToggleC:SetValue(true)
 
 
-local ToggleV = Tabs.Setting:AddToggle("ToggleV", {Title = "",Description = "", Default = true })
+local ToggleV = Tabs.Setting:AddToggle("ToggleV", {Title = "Kĩ Năng V",Description = "", Default = true })
 ToggleV:OnChanged(function(Value)
     SkillV = Value
 end)
