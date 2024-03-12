@@ -1,3 +1,16 @@
+--[[
+Dev của best trial và là người giúp làm Best Hub v4.0.0
+
+Bản quyền (c) 2024 Gamer144roblox
+
+Mọi người không được phép sao chép, sửa đổi, hoặc tái phân phối phần mềm Best Hub v4.0.0 hoặc bất kỳ phiên bản nào khác của nó mà không có sự cho phép trước từ Dev.
+
+PHẦN MỀM NÀY ĐƯỢC CUNG CẤP "NHƯ VẬY", KHÔNG CÓ BẢO ĐẢM NÀO.
+
+https://raw.githubusercontent.com/Gamer144roblox/Ch-ng-skid-/main/B%E1%BA%A3n%20quy%E1%BB%81n
+]]
+---///--------------------------------------------------------------\\\---
+
 _G.BringMonster = true
 _G.BringMode = 300
 spawn(function()
@@ -51,7 +64,7 @@ end)
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/BigNewBiew97/Test/main/Key-System%20%26%20Keyless.txt"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Gamer144roblox/Ch-ng-skid-/main/Key-System%20%26%20Keyless%20Test.txt"))()
 local Window = Fluent:CreateWindow({
     Title = "BEST HUB | ".._G.Version,
     SubTitle = "By Huy and Best Trial",
