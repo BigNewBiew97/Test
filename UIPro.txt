@@ -10,6 +10,39 @@ PHẦN MỀM NÀY ĐƯỢC CUNG CẤP "NHƯ VẬY", KHÔNG CÓ BẢO ĐẢM NÀO
 https://raw.githubusercontent.com/Gamer144roblox/Ch-ng-skid-/main/B%E1%BA%A3n%20quy%E1%BB%81n
 ]]
 ---///--------------------------------------------------------------\\\---
+-- Tạo một đối tượng ScreenGui để chứa nút và hiển thị trên màn hình của người chơi
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game:GetService("Players").LocalPlayer.PlayerGui
+
+-- Tạo một đối tượng TextButton (nút văn bản) để đại diện cho nút
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 80, 0, 30) -- Kích thước của nút (80x30 pixels)
+button.Position = UDim2.new(0, 10, 0, 10) -- Vị trí của nút (10 pixels từ góc trái và trên)
+button.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Màu nền của nút
+
+-- Tạo Gradient cho màu nền
+local gradient = Instance.new("UIGradient")
+gradient.Rotation = 90
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 0, 0)), -- Màu đỏ
+    ColorSequenceKeypoint.new(0.167, Color3.fromRGB(255, 255, 0)), -- Màu vàng
+    ColorSequenceKeypoint.new(0.333, Color3.fromRGB(0, 255, 0)), -- Màu xanh lá cây
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 255, 255)), -- Màu xanh lam
+    ColorSequenceKeypoint.new(0.667, Color3.fromRGB(0, 0, 255)), -- Màu xanh dương
+    ColorSequenceKeypoint.new(0.833, Color3.fromRGB(255, 0, 255)), -- Màu tím
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0)) -- Màu đỏ
+}
+gradient.Parent = button -- Đặt Gradient là con của nút
+
+-- Văn bản trên nút
+button.Text = "Stop Tween"
+button.Parent = screenGui -- Đặt nút là con của ScreenGui
+
+-- Gán sự kiện khi nút được nhấn
+button.MouseButton1Click:Connect(function()
+    -- Điều khiển hành động khi nút được nhấn ở đây
+    toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+end)
 
 _G.BringMonster = true
 _G.BringMode = 300
@@ -115,6 +148,20 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
 	game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 	wait(1)
 	vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+local player = game.Players.LocalPlayer
+
+player.OnTeleport:Connect(function(state)
+    if state == Enum.TeleportState.Started then
+        -- Yêu cầu quay lại trò chơi khi bị kick
+        local success, errorMessage = pcall(function()
+            game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, player)
+        end)
+        if not success then
+            warn("Failed to teleport back to game:", errorMessage)
+        end
+    end
 end)
 
 First_Sea = false
@@ -2518,7 +2565,7 @@ ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
 ImageButton.Size = UDim2.new(0, 50, 0, 50)
 ImageButton.Draggable = true
-ImageButton.Image = "rbxassetid://16223659141"
+ImageButton.Image = "rbxassetid://16711282498"
 ImageButton.MouseButton1Down:connect(function()
     game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
 end)
@@ -2602,16 +2649,6 @@ end)
             end)
         end
     end)
-
-
-    Tabs.Main:AddButton({
-        Title = "Dừng bay",
-        Description = "",
-        Callback = function()
-           toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-        end
-    })
-
 
     local ToggleLevel = Tabs.Main:AddToggle("ToggleLevel", {
         Title = "Cày Cấp Độ",
@@ -6920,6 +6957,17 @@ function NoFog()
         end
     end
 end
+
+Tabs.Misc:AddButton({
+	Title = "Luôn Luôn ngày",
+	Description = "",
+	Callback = function()
+        game:GetService("RunService").Heartbeat:wait() do
+        game:GetService("Lighting").ClockTime = 12
+        end
+    end
+})
+
 
 local SettingFarm = Tabs.Setting:AddSection("Farming")
 
