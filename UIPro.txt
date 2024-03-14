@@ -2579,28 +2579,36 @@ function to(p)
 		end)
 	end
 local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
 local ImageButton = Instance.new("ImageButton")
 local UICorner = Instance.new("UICorner")
 
 ScreenGui.Parent = game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-ImageButton.Parent = ScreenGui
-ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.new(0, 0, 0) -- Màu đen cho khung viền
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
+Frame.Size = UDim2.new(0, 50, 0, 50)
+
+ImageButton.Parent = Frame -- Đặt ImageButton vào trong Frame
+ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255) -- Màu trắng cho nút (ví dụ)
 ImageButton.BorderSizePixel = 0
-ImageButton.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
-ImageButton.Size = UDim2.new(0, 50, 0, 50)
-ImageButton.Draggable = true
+ImageButton.Size = UDim2.new(1, 0, 1, 0)
 ImageButton.Image = "rbxassetid://16711282498"
 ImageButton.MouseButton1Down:connect(function()
     game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
 end)
 
+UICorner.CornerRadius = UDim.new(0, 8) -- Bo tròn góc của Frame
+UICorner.Parent = Frame
+
 if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-	game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+    game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
 end
 if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+    game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
 end
 
 local Farming = Tabs.Main:AddSection("Farming")
@@ -6637,38 +6645,6 @@ function Hop()
 	end
 	Teleport()
 end      
-
-
-Tabs.Misc:AddButton({
-    Title = "Copy Job Sever ",
-    Description = "",
-    Callback = function()
-         setclipboard(game.JobId)
-    end
-})
-
-
-Tabs.Mics:AddInput("Job Id", {
-    Title = "Job Id",
-    Default = "",
-    Placeholder = "input",
-    Numeric = false, 
-    Finished = false,
-    Callback = function(a)
-        JobId_Textbox = a
-    end
-})
-
-
-Tabs.Misc:AddButton({
-    Title = "Join Jon Id",
-    Description = "",
-    Callback = function()
-         b:TeleportToPlaceInstance(game.PlaceId, JobId_Textbox, c)
-     end
-})
-
-
 
 local Mastery = Tabs.Misc:AddSection("Đội")
 
