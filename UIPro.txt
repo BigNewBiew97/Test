@@ -6638,6 +6638,7 @@ function Hop()
 	Teleport()
 end      
 
+
 Tabs.Misc:AddButton({
     Title = "Copy Job Sever ",
     Description = "",
@@ -6645,6 +6646,7 @@ Tabs.Misc:AddButton({
          setclipboard(game.JobId)
     end
 })
+
 
 Tabs.Mics:AddInput("Job Id", {
     Title = "Job Id",
@@ -6657,13 +6659,15 @@ Tabs.Mics:AddInput("Job Id", {
     end
 })
 
+
 Tabs.Misc:AddButton({
     Title = "Join Jon Id",
-    Description = "https://discord.com/invite/mfAhV7dN",
+    Description = "",
     Callback = function()
          b:TeleportToPlaceInstance(game.PlaceId, JobId_Textbox, c)
      end
 })
+
 
 
 local Mastery = Tabs.Misc:AddSection("Đội")
