@@ -6640,7 +6640,7 @@ end
 
 Tabs.Misc:AddButton({
     Title = "Copy Job Sever ",
-    Description = "https://discord.com/invite/mfAhV7dN",
+    Description = "",
     Callback = function()
          setclipboard(game.JobId)
     end
@@ -6664,6 +6664,7 @@ Tabs.Misc:AddButton({
          b:TeleportToPlaceInstance(game.PlaceId, JobId_Textbox, c)
      end
 })
+
 
 local Mastery = Tabs.Misc:AddSection("Đội")
 
