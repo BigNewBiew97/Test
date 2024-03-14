@@ -10,6 +10,7 @@ PHẦN MỀM NÀY ĐƯỢC CUNG CẤP "NHƯ VẬY", KHÔNG CÓ BẢO ĐẢM NÀO
 https://raw.githubusercontent.com/Gamer144roblox/Ch-ng-skid-/main/B%E1%BA%A3n%20quy%E1%BB%81n
 ]]
 ---///--------------------------------------------------------------\\\---
+wait(1),
 -- Tạo một đối tượng ScreenGui để chứa nút và hiển thị trên màn hình của người chơi
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game:GetService("Players").LocalPlayer.PlayerGui
@@ -43,6 +44,32 @@ button.MouseButton1Click:Connect(function()
     -- Điều khiển hành động khi nút được nhấn ở đây
     toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
 end)
+
+-- Định nghĩa hàm reset
+local function resetFunction()
+    -- Thực hiện hành động để reset trạng thái ban đầu
+    print("Resetting...")
+end
+
+-- Định nghĩa hàm callback
+local function myCallback()
+    -- Thử thực hiện một hành động có thể gây lỗi
+    local success, errorMessage = pcall(function()
+        -- Đoạn mã có thể gây lỗi
+        error("Something went wrong!")
+    end)
+    
+    -- Kiểm tra xem có lỗi không
+    if not success then
+        -- Nếu có lỗi, in ra thông báo lỗi và thực hiện reset
+        warn("Callback function encountered an error:", errorMessage)
+        -- Thực hiện hành động reset
+        resetFunction()
+    else
+        -- Nếu không có lỗi, tiếp tục thực hiện hành động tiếp theo
+        print("Callback function executed successfully!")
+    end
+end
 
 _G.BringMonster = true
 _G.BringMode = 300
@@ -5916,6 +5943,49 @@ elseif Third_Sea then
             Tween2(CFrame.new(-5017.40869, 314.844055, -2823.0127, -0.925743818, 4.48217499e-08, -0.378151238, 4.55503146e-09, 1, 1.07377559e-07, 0.378151238, 9.7681621e-08, -0.925743818))
         end
     })
+end
+
+Tabs.Visual:AddButton({
+    Title = "Ảo thuật",
+    Description = "",
+    Callback = function()
+    local ID =16711282498 --Này Là Id Ảnh Nha Ní :>>>
+function spamDecal(v)
+    if v:IsA("Part") then
+        for i=0, 5 do
+            D = Instance.new("Decal")
+            D.Name = "Best Hub Hub"
+            D.Face = i
+            D.Parent = v
+            D.Texture = ("http://www.roblox.com/asset/?id="..Id)
+        end
+    else
+        if v:IsA("Model") then
+            for a,b in pairs(v:GetChildren()) do
+                spamDecal(b)
+            end
+        end
+    end
+end
+function decalspam(id) --use this function, not the one on top
+    Id = id
+    for i,v in pairs(game.Workspace:GetChildren()) do
+        if v:IsA("Part") then
+        for i=0, 5 do
+            D = Instance.new("Decal")
+            D.Name = "Fries Hub"
+            D.Face = i
+            D.Parent = v
+            D.Texture = ("http://www.roblox.com/asset/?id="..id)
+        end
+    else
+        if v:IsA("Model") then
+            for a,b in pairs(v:GetChildren()) do
+                spamDecal(b)
+            end
+        end
+    end
+end
 end
 
 Tabs.Visual:AddButton({
