@@ -6642,10 +6642,12 @@ Tabs.Misc:AddButton({
     Title = "Copy Job Sever ",
     Description = "https://discord.com/invite/mfAhV7dN",
     Callback = function()
-    setclipboard(game.JobId)
+         setclipboard(game.JobId)
+    end
+})
 
 Tabs.Mics:AddInput("Job Id", {
-    Title = "Jon Id",
+    Title = "Job Id",
     Default = "",
     Placeholder = "input",
     Numeric = false, 
