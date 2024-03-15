@@ -120,7 +120,7 @@ spawn(function()
     require(game.ReplicatedStorage.Notification).new("<Color=Blue>THÔNG BÁO:Hub Ít Tính Năng Do Tối Ưu<Color=/>"):Display()
 end)
 
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local Fluent = loadstring(game:HttpGet("https://github.com/ThundarZ/Welcome/tree/main/Main/UI"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Gamer144roblox/Ch-ng-skid-/main/Key-System%20%26%20Keyless%20Test.txt"))()
@@ -130,7 +130,7 @@ local Window = Fluent:CreateWindow({
     TabWidth = 80,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
-    Theme = "Dark",
+    Theme = "Luffy",
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
