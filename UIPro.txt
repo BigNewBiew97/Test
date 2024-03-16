@@ -120,7 +120,7 @@ spawn(function()
     require(game.ReplicatedStorage.Notification).new("<Color=Blue>THÔNG BÁO:Hub Ít Tính Năng Do Tối Ưu<Color=/>"):Display()
 end)
 
-local Fluent = loadstring(game:HttpGet("https://github.com/ThundarZ/Welcome/tree/main/Main/UI"))()
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Gamer144roblox/Ch-ng-skid-/main/Key-System%20%26%20Keyless%20Test.txt"))()
@@ -130,7 +130,7 @@ local Window = Fluent:CreateWindow({
     TabWidth = 80,
     Size = UDim2.fromOffset(500, 350),
     Acrylic = false,
-    Theme = "Luffy",
+    Theme = "Dark",
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
@@ -2579,31 +2579,48 @@ function to(p)
 		end)
 	end
 local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
 local ImageButton = Instance.new("ImageButton")
 local UICorner = Instance.new("UICorner")
+
+local isMenuOpen = false -- Biến để theo dõi trạng thái của menu
+local isButtonEnabled = true -- Biến để kiểm tra xem nút có thể nhấn được hay không
 
 ScreenGui.Parent = game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.new(1, 0, 0) -- Màu đỏ cho khung viền
-Frame.BorderSizePixel = 4 -- Tăng độ dày của viền
-Frame.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
-Frame.Size = UDim2.new(0, 50, 0, 50)
+ImageButton.Parent = ScreenGui
+ImageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ImageButton.BorderSizePixel = 0
+ImageButton.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
+ImageButton.Size = UDim2.new(0, 50, 0, 50)
+ImageButton.Draggable = true
+-- Thiết lập hình ảnh ban đầu khi menu chưa được mở
+ImageButton.Image = "rbxassetid://16763403642"
 
-ImageButton.Parent = Frame
-ImageButton.BackgroundTransparency = 1
-ImageButton.Size = UDim2.new(1, 0, 1, 0)
-ImageButton.Image = "rbxassetid://16711282498" -- Thay thế 'your_image_button_id_here' bằng ID của hình ảnh nút
+-- Hàm để thay đổi hình ảnh khi menu được mở hoặc đóng
+local function toggleMenu()
+    if not isButtonEnabled then return end -- Kiểm tra nút có thể nhấn được hay không
+    isButtonEnabled = false -- Đặt cờ để ngăn chặn việc nhấn nút nhiều lần
+    isMenuOpen = not isMenuOpen
+    if isMenuOpen then
+        ImageButton.Image = "rbxassetid://16763401084"
+        game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.End, false, game)
+    else
+        ImageButton.Image = "rbxassetid://YourImageIDWhenMenuClosed"
+    end
+    wait(0.5) -- Chờ 0.5 giây trước khi cho phép nhấn nút lại
+    isButtonEnabled = true
+end
 
-ImageButton.MouseButton1Down:Connect(function()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
-end)
+-- Hàm để kiểm tra xem menu đã được bật hay chưa
+local function isMenuActivated()
+    return isMenuOpen
+end
 
-UICorner.CornerRadius = UDim.new(0, 8)
-UICorner.Parent = Frame
+-- Kết nối sự kiện click chuột để chuyển đổi trạng thái menu và thay đổi hình ảnh
+ImageButton.MouseButton1Down:Connect(toggleMenu)
 
+-- Code xử lý xóa hình ảnh Death và Respawn
 if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
     game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
 end
@@ -6645,6 +6662,7 @@ function Hop()
 	end
 	Teleport()
 end      
+
 
 local Mastery = Tabs.Misc:AddSection("Đội")
 
