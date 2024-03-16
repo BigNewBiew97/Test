@@ -44,32 +44,6 @@ button.MouseButton1Click:Connect(function()
     toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
 end)
 
--- Định nghĩa hàm reset
-local function resetFunction()
-    -- Thực hiện hành động để reset trạng thái ban đầu
-    print("Resetting...")
-end
-
--- Định nghĩa hàm callback
-local function myCallback()
-    -- Thử thực hiện một hành động có thể gây lỗi
-    local success, errorMessage = pcall(function()
-        -- Đoạn mã có thể gây lỗi
-        error("Something went wrong!")
-    end)
-    
-    -- Kiểm tra xem có lỗi không
-    if not success then
-        -- Nếu có lỗi, in ra thông báo lỗi và thực hiện reset
-        warn("Callback function encountered an error:", errorMessage)
-        -- Thực hiện hành động reset
-        resetFunction()
-    else
-        -- Nếu không có lỗi, tiếp tục thực hiện hành động tiếp theo
-        print("Callback function executed successfully!")
-    end
-end
-
 _G.BringMonster = true
 _G.BringMode = 300
 spawn(function()
@@ -134,17 +108,17 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.End
 })
 local Tabs = {
-    Main = Window:AddTab({ Title = "chính", Icon = "home" }),
-    Stats = Window:AddTab({ Title = "chỉ số", Icon = "plus-circle" }),
-    Player = Window:AddTab({ Title = "người chơi", Icon = "baby" }),
-    Teleport = Window:AddTab({ Title = "tele đảo", Icon = "palmtree" }),
-    Fruit = Window:AddTab({ Title = "trái", Icon = "cherry" }),
-    Raid = Window:AddTab({ Title = "tập kích", Icon = "swords" }),
-    Visual = Window:AddTab({ Title = "Visual", Icon = "scan-face" }),
-    Race = Window:AddTab({ Title = "Tộc V4", Icon = "chevrons-right" }),
-    Shop = Window:AddTab({ Title = "cửa hàng", Icon = "shopping-cart" }),
-	Misc = Window:AddTab({ Title = "khác", Icon = "list-plus" }),
-    Setting = Window:AddTab({ Title = "cài đặt", Icon = "settings" }),
+    Main = Window:AddTab({ Title = "chính", Icon = "" }),
+    Stats = Window:AddTab({ Title = "chỉ số", Icon = "" }),
+    Player = Window:AddTab({ Title = "người chơi", Icon = "" }),
+    Teleport = Window:AddTab({ Title = "tele đảo", Icon = "" }),
+    Fruit = Window:AddTab({ Title = "trái", Icon = "" }),
+    Raid = Window:AddTab({ Title = "tập kích", Icon = "" }),
+    Visual = Window:AddTab({ Title = "Visual", Icon = "" }),
+    Race = Window:AddTab({ Title = "Tộc V4", Icon = "" }),
+    Shop = Window:AddTab({ Title = "cửa hàng", Icon = "" }),
+	Misc = Window:AddTab({ Title = "khác", Icon = "" }),
+    Setting = Window:AddTab({ Title = "cài đặt", Icon = "" }),
 }
 local Options = Fluent.Options
 do
@@ -2582,9 +2556,6 @@ local ScreenGui = Instance.new("ScreenGui")
 local ImageButton = Instance.new("ImageButton")
 local UICorner = Instance.new("UICorner")
 
-local isMenuOpen = false -- Biến để theo dõi trạng thái của menu
-local isButtonEnabled = true -- Biến để kiểm tra xem nút có thể nhấn được hay không
-
 ScreenGui.Parent = game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
@@ -2594,42 +2565,20 @@ ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
 ImageButton.Size = UDim2.new(0, 50, 0, 50)
 ImageButton.Draggable = true
--- Thiết lập hình ảnh ban đầu khi menu chưa được mở
-ImageButton.Image = "rbxassetid://16763403642"
+ImageButton.Image = "rbxassetid://16711282498"
+ImageButton.MouseButton1Down:connect(function()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
+end)
 
--- Hàm để thay đổi hình ảnh khi menu được mở hoặc đóng
-local function toggleMenu()
-    if not isButtonEnabled then return end -- Kiểm tra nút có thể nhấn được hay không
-    isButtonEnabled = false -- Đặt cờ để ngăn chặn việc nhấn nút nhiều lần
-    isMenuOpen = not isMenuOpen
-    if isMenuOpen then
-        ImageButton.Image = "rbxassetid://16763401084"
-        game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.End, false, game)
-    else
-        ImageButton.Image = "rbxassetid://YourImageIDWhenMenuClosed"
-    end
-    wait(0.5) -- Chờ 0.5 giây trước khi cho phép nhấn nút lại
-    isButtonEnabled = true
-end
-
--- Hàm để kiểm tra xem menu đã được bật hay chưa
-local function isMenuActivated()
-    return isMenuOpen
-end
-
--- Kết nối sự kiện click chuột để chuyển đổi trạng thái menu và thay đổi hình ảnh
-ImageButton.MouseButton1Down:Connect(toggleMenu)
-
--- Code xử lý xóa hình ảnh Death và Respawn
 if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-    game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+	game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
 end
 if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-    game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
 end
 
 local Farming = Tabs.Main:AddSection("Farming")
-local listfastattack = {'Normal Attack','Fast Attack','Super Fast Attack'}
+local listfastattack = {'Normal Attack','Fast Attack','Super Fast Attack','Extra Fast Attack'}
 
     local DropdownDelayAttack = Tabs.Main:AddDropdown("DropdownDelayAttack", {
         Title = "Chọn Tốc Độ Đánh",
@@ -2647,6 +2596,8 @@ local listfastattack = {'Normal Attack','Fast Attack','Super Fast Attack'}
 		_G.Fast_Delay = 0.02
 	elseif _G.FastAttackGamer144YTB_Mode == "Super Fast Attack" then
 		_G.Fast_Delay = 0.008
+	elseif _G.FastAttackGamer144_Mode == "Extra Fast Attack"
+	    _G.Fast_Delay = 0.003
 	end
 end)
 
