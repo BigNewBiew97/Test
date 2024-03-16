@@ -1,0 +1,291 @@
+getgenv().Acc = "FarmAccount"
+
+if getgenv().huhutvk then return end
+getgenv().huhutvk = true
+
+repeat wait() until game:IsLoaded()
+
+if game.Players.LocalPlayer.Name == getgenv().Acc  then return end
+getgenv().UseNightBell = false
+getgenv().FieldConfig = "SV1.txt"
+getgenv().TimeConfig = "SVT1.txt"
+
+getgenv().FIELD = "Clover Field"
+getgenv().Time = "Day"
+
+if isfile(FieldConfig) then 
+    getgenv().FIELD = readfile(FieldConfig)
+end
+if isfile(TimeConfig) then 
+    getgenv().Time = readfile(TimeConfig)
+end
+
+repeat wait() until game:IsLoaded()
+local plr = game.Players.LocalPlayer
+repeat wait() until plr
+repeat wait() until plr.Character
+repeat wait() until plr.Character:FindFirstChild("HumanoidRootPart")
+repeat wait() until plr.PlayerGui:FindFirstChild("ScreenGui")
+repeat wait() until plr.PlayerGui:FindFirstChild("ScreenGui"):FindFirstChild("Menus")
+repeat wait() until plr.PlayerGui:FindFirstChild("ScreenGui"):FindFirstChild("LoadingMessage")
+repeat wait() until plr.PlayerGui:FindFirstChild("ScreenGui"):FindFirstChild("LoadingMessage").Visible==false
+
+
+repeat wait()
+until game:FindFirstChild("CoreGui")
+spawn(function()
+    while wait(2) do
+        if game.CoreGui.RobloxPromptGui.promptOverlay:FindFirstChild("ErrorPrompt") then
+            game:Shutdown()
+            wait(10)
+        end
+    end
+end)
+repeat wait(1) until game:IsLoaded() and game.Players.LocalPlayer
+repeat wait() until game.Players.LocalPlayer.Character
+and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+local Timer = tick()
+repeat wait()
+    if tick() - Timer > 60 then 
+        game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer)
+    end
+until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+and game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScreenGui")
+and game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScreenGui"):FindFirstChild("Menus")
+and game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScreenGui"):FindFirstChild("LoadingMessage")
+and not game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScreenGui"):FindFirstChild("LoadingMessage").Visible
+
+function IsPrivateServer() 
+    do return game.Players:FindFirstChild(getgenv().Acc) end
+        local s,e = pcall(function() 
+        local response = game:HttpGet('https://httpbin.org/get')
+        local decoded = game.HttpService:JSONDecode(game.HttpService:JSONDecode(response).headers['Roblox-Session-Id'])
+        
+        local isVipServer = decoded.JoinType == 'Specific_PrivateGame'
+        return isVipServer
+    end)
+    if s then return e else return false end
+end
+-- if not IsPrivateServer() then 
+--     while true do 
+--         getgenv().StopUpdate = true
+--         writefile("Account Manager Supporter.txt","0")
+--         wait(2)
+--     end
+--     return
+-- end
+if not game.Players:FindFirstChild(getgenv().Acc) then 
+    game:Shutdown()
+end
+setfpscap(10)
+
+spawn(function()
+    function ConvertPing(v)
+        v = v.Text:gsub(" ms", "")
+        return tonumber(v)
+    end
+    if not game.CoreGui.RobloxGui:FindFirstChild("PerformanceStats") then
+        UserSettings().GameSettings.PerformanceStatsVisible = true
+        wait(1)
+    end
+    local PingTextPath
+    for i, v in ipairs(game.CoreGui.RobloxGui.PerformanceStats:GetChildren()) do
+        if v:FindFirstChild("StatsMiniTextPanelClass")
+        and v.StatsMiniTextPanelClass.TitleLabel.Text == "Ping" then
+            PingTextPath = v.StatsMiniTextPanelClass.ValueLabel
+        end
+    end
+    local PingText = ConvertPing(PingTextPath)
+    while wait(20) do
+        pcall(function()
+            if PingText == ConvertPing(PingTextPath) and PingText ~= 0 then
+                game:Shutdown()
+                wait(10)
+            end
+            PingText = ConvertPing(PingTextPath)
+        end)
+    end
+end)
+
+local CurrTime = getgenv().Time
+
+local FieldPosList = {}
+for k,v in pairs(game.Workspace.FlowerZones:GetChildren()) do 
+    FieldPosList[v.Name] = CFrame.new(v.Position+Vector3.new(0,5,0))*CFrame.new(0,0,3)
+end
+local FieldPos = FieldPosList[getgenv().FIELD]
+
+for i, player in pairs(game.Players:GetChildren()) do
+    player.Chatted:Connect(function(mess) 
+        if FieldPosList[mess] then 
+            FieldPos  = FieldPosList[mess]
+            getgenv().FIELD = mess
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Setted Field to "..mess,"All")
+            writefile(FieldConfig,mess)
+        end
+        if getgenv().UseNightBell then 
+            if mess == "Day" or mess == "Night" then 
+                CurrTime = mess
+                writefile(TimeConfig,mess)
+                game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Setted Time to "..mess,"All")
+            end
+        end
+        
+    end)
+end
+game.Players.PlayerAdded:Connect(function(player)
+    player.Chatted:Connect(function(mess) 
+        if FieldPosList[mess] then 
+            FieldPos  = FieldPosList[mess]
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Setted Field to "..mess,"All")
+            writefile(FieldConfig,mess)
+            getgenv().FIELD = mess
+        end
+        if getgenv().UseNightBell then 
+            if mess == "Day" or mess == "Night" then 
+                CurrTime = mess
+                writefile(TimeConfig,mess)
+                game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Setted Time to "..mess,"All")
+            end
+        end
+    end)
+end)
+
+local TvkStatCache = game:GetService("ReplicatedStorage").Events.RetrievePlayerStats:InvokeServer()
+spawn(function() 
+    while wait(1) do 
+        TvkStatCache =game:GetService("ReplicatedStorage").Events.RetrievePlayerStats:InvokeServer()
+        getfenv().TvkStatCache = TvkStatCache
+    end
+end)
+
+setfflag("HumanoidParallelRemoveNoPhysics", "False")
+setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+game:GetService('RunService').Stepped:Connect(function()
+    if true then plr.Character.Humanoid:ChangeState(11)
+    end
+end)
+function FPSBoost() 
+    settings().Rendering.QualityLevel = "Level01"
+    UserSettings():GetService("UserGameSettings").GraphicsQualityLevel = 1
+    UserSettings():GetService("UserGameSettings").MasterVolume = 0
+    local cc = Instance.new("Part",workspace)
+    cc.Name = "tvk"
+    cc.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,-4,0)
+    cc.Anchored=true
+    cc.Size = Vector3.new(50,5,50)
+
+    local plr = game.Players.LocalPlayer
+    local name = plr.Name
+    local blacklist = {
+        "FrameworkRunner","CombatFramework"
+    }
+    for k,v in pairs(getscripts()) do 
+        if v.Name~="Events" then 
+            pcall(function() 
+                v.Disabled = true     
+            end)
+            pcall(function() 
+                v:Destroy()    
+            end)
+        end
+    end
+    
+    -- for k,v in pairs(game.Workspace:GetChildren()) do
+    --     if v.Name ~= plr.name then 
+    --         pcall(function() 
+    --             v:Destroy()    
+    --         end)    
+    --     end
+    -- end
+    -- for k,v in pairs(game.Players:GetChildren()) do 
+    --     if v.Name ~= name then v:Destroy() end
+    -- end
+    for k,v in pairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do 
+        pcall(function() 
+            v:Destroy()    
+        end)    
+    end
+    for k,v in pairs(game.Players.LocalPlayer.PlayerScripts:GetChildren()) do 
+        pcall(function() 
+            v.Disabled = true     
+        end)
+        pcall(function() 
+            v:Destroy()    
+        end)
+    end
+    for k,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        if v:IsA("LocalScript") then 
+            pcall(function() 
+                v.Disabled = true     
+            end)
+            pcall(function() 
+                v:Destroy()    
+            end)
+        end
+    end
+    for k,v in pairs(game:GetService("StarterPlayer").StarterCharacterScripts:GetChildren()) do v:Destroy() end
+    -- game.Players.PlayerAdded:Connect(function(a) 
+    --     if a.Name == name then return end
+    --     delay(0,function() 
+    --         a:Destroy()
+    --     end)
+    -- end)
+    plr.CharacterAdded:Connect(function() 
+        wait(2)
+        for k,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            if v:IsA("LocalScript") then 
+                pcall(function() 
+                    v.Disabled = true     
+                end)
+                pcall(function() 
+                    v:Destroy()    
+                end)
+            end
+        end
+    end)
+    game.RunService:Set3dRenderingEnabled(false)
+
+end
+FPSBoost()
+function UseMethod() 
+    game:GetService("ReplicatedStorage").Events.PlayerQuickbarEvent:FireServer({["rua bi oc cac thieu nang suc vat a"] = workspace})  
+end
+spawn(function() 
+    while wait() do 
+        pcall(function() 
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = FieldPos
+        end)
+    end
+end)
+UseMethod()
+UseMethod()
+for i = 1,6 do 
+    game.ReplicatedStorage.Events.ClaimHive:FireServer(i)
+end
+local old = TvkStatCache.Eggs["FestiveBean"]
+while wait(1) do 
+    if not game.Players:FindFirstChild(getgenv().Acc) then 
+        game:Shutdown()
+    end
+    UseMethod()
+    pcall(function() 
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = FieldPos
+        game.ReplicatedStorage.Events.ToyEvent:FireServer("Snow Machine")
+        if getgenv().UseNightBell and CurrTime == "Night" then 
+            game:GetService("ReplicatedStorage").Events.PlayerActivesCommand:FireServer({["Name"] = "Night Bell"})
+        end
+        game:GetService("ReplicatedStorage").Events.PlayerActivesCommand:FireServer({["Name"] = "Festive Bean"})
+        game:GetService("ReplicatedStorage").Events.PlayerActivesCommand:FireServer({["Name"] = "Cloud Vial"})
+    end)
+    if TvkStatCache.Eggs["FestiveBean"] ~= old then 
+        --spawn(function() messagebox("","tvk1308RM",0) end)
+        --wait(5)
+        game.Players.LocalPlayer:Kick()
+    end
+    if getgenv().UseNightBell and CurrTime == "Night" and TvkStatCache.Eggs["NightBell"] == 0 then 
+        game.Players.LocalPlayer:Kick()
+        wait(1)
+        game:Shutdown()
+    end
+end
