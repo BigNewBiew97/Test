@@ -1,0 +1,127 @@
+local player = game.Players.LocalPlayer
+local UIS = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- Cấu hình
+local KNIFE_DAMAGE = 10
+local THROW_FORCE = 120
+local COOLDOWN = 2
+local KNIFE_OFFSET = CFrame.new(0, 0, -0.5) * CFrame.Angles(0, math.rad(90), 0)
+
+-- Biến trạng thái
+local canThrow = true
+local currentKnife = nil
+local knifeModel = ReplicatedStorage:WaitForChild("ThrowingKnife")
+
+-- Hàm gắn dao vào tay
+local function equipKnife()
+    local character = player.Character
+    if not character then return end
+    
+    local rightHand = character:FindFirstChild("RightHand") or character:FindFirstChild("Right Arm")
+    if not rightHand then return end
+    
+    -- Tạo dao mới
+    currentKnife = knifeModel:Clone()
+    currentKnife.Parent = character
+    
+    -- Gắn vào tay
+    local weld = Instance.new("WeldConstraint")
+    weld.Part0 = rightHand
+    weld.Part1 = currentKnife.PrimaryPart
+    weld.Parent = currentKnife.PrimaryPart
+    
+    -- Đặt vị trí
+    currentKnife:SetPrimaryPartCFrame(rightHand.CFrame * KNIFE_OFFSET)
+    
+    -- Hiệu ứng khi cầm dao
+    if currentKnife.PrimaryPart:FindFirstChild("IdleSound") then
+        currentKnife.PrimaryPart.IdleSound:Play()
+    end
+end
+
+-- Hàm ném dao
+local function throwKnife()
+    if not canThrow or not currentKnife then return end
+    
+    canThrow = false
+    
+    -- Tháo dao khỏi tay
+    for _, constraint in ipairs(currentKnife:GetDescendants()) do
+        if constraint:IsA("WeldConstraint") then
+            constraint:Destroy()
+        end
+    end
+    
+    currentKnife.Parent = workspace
+    
+    -- Tính hướng ném từ camera
+    local camera = workspace.CurrentCamera
+    local mousePos = UIS:GetMouseLocation()
+    local ray = camera:ViewportPointToRay(mousePos.X, mousePos.Y)
+    local direction = ray.Direction
+    
+    -- Áp dụng lực ném
+    currentKnife.PrimaryPart.Velocity = direction * THROW_FORCE
+    currentKnife.PrimaryPart.RotVelocity = Vector3.new(0, 20, 0)
+    
+    -- Hiệu ứng ném
+    if currentKnife.PrimaryPart:FindFirstChild("ThrowSound") then
+        currentKnife.PrimaryPart.ThrowSound:Play()
+    end
+    
+    -- Xử lý khi dao trúng mục tiêu
+    currentKnife.PrimaryPart.Touched:Connect(function(hit)
+        local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+        if humanoid and hit.Parent ~= player.Character then
+            humanoid:TakeDamage(KNIFE_DAMAGE)
+            
+            -- Hiệu ứng trúng
+            if currentKnife.PrimaryPart:FindFirstChild("HitSound") then
+                currentKnife.PrimaryPart.HitSound:Play()
+            end
+            
+            -- Particle khi trúng
+            local hitEffect = Instance.new("ParticleEmitter")
+            hitEffect.Texture = "rbxassetid://245050902"
+            hitEffect.Color = ColorSequence.new(Color3.fromRGB(255, 50, 50))
+            hitEffect.LightEmission = 1
+            hitEffect.Parent = currentKnife.PrimaryPart
+            game.Debris:AddItem(hitEffect, 1)
+            
+            currentKnife:Destroy()
+        end
+    end)
+    
+    -- Tự hủy sau 5 giây
+    game.Debris:AddItem(currentKnife, 5)
+    
+    -- Hồi dao sau cooldown
+    task.delay(COOLDOWN, function()
+        canThrow = true
+        equipKnife()
+    end)
+end
+
+-- Kết nối sự kiện nhấn chuột
+UIS.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed and input.UserInputType == Enum.UserInputType.MouseButton1 then
+        throwKnife()
+    end
+end)
+
+-- Xử lý khi nhân vật spawn/respawn
+player.CharacterAdded:Connect(function(character)
+    character:WaitForChild("Humanoid").Died:Connect(function()
+        if currentKnife then
+            currentKnife:Destroy()
+        end
+    end)
+    equipKnife()
+end)
+
+-- Gắn dao lần đầu
+if player.Character then
+    equipKnife()
+end
